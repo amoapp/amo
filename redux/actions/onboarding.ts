@@ -16,6 +16,10 @@ export const SEGREGATE_CONTACTS = 'SEGREGATE_CONTACTS'
 
 
 // Functions:
+/**
+ * Segregates contacts based on whether the contact is on Amo or not.
+ * Passes segregated contacts to the userReducer.
+ */
 export const segregateContacts = createAsyncThunk<
   ActionResult<typeof SEGREGATE_CONTACTS, Contact[]>,
   Contact[]
