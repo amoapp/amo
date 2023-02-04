@@ -5,7 +5,10 @@ import userReducer from './user'
 
 
 // Constants:
-const reducer = combineReducers({ onboardingReducer, userReducer })
+const reducer = combineReducers({
+  onboarding: onboardingReducer,
+  user: userReducer
+})
 
 
 // Exports:

@@ -3,8 +3,8 @@ import { ActionResult, ActionType } from '../types'
 
 
 // Constants:
-import { DEFAULT_USER_STATE, UserState } from '../store/user'
-import { SET_DATABASE_USER, SET_FIRESTORE_USER } from '../actions/user'
+import { DEFAULT_USER_STATE, UserState } from '@store/user'
+import { SET_DATABASE_USER, SET_FIRESTORE_USER } from '@actions/user'
 
 
 // Functions:

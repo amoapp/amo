@@ -9,16 +9,16 @@ import database from '@react-native-firebase/database'
 // Typescript:
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { StackNavigatorParamList } from '../../../../../../types'
-import { AppDispatch } from '../../../../../../redux/store'
+import { AppDispatch } from '@store/index'
 
 
 // Constants:
-import ROUTES from '../../../../../../routes'
-import { DATABASE_REFERENCES } from '../../../../../../firebase/references'
+import ROUTES from '@routes'
+import { DATABASE_REFERENCES } from '@firebase-references'
 
 
 // Redux:
-import { setDatabaseUser, setFirestoreUser } from '../../../../../../redux/actions/user'
+import { setDatabaseUser, setFirestoreUser } from '@actions/user'
 
 
 // Styles:

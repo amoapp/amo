@@ -17,16 +17,16 @@ import { Contact, StackNavigatorParamList } from '../../../../types'
 
 
 // Constants:
-import ROUTES from '../../../../routes'
-import { DEFAULT_DATABASE_USER, DEFAULT_FIRESTORE_USER } from '../../../../constants/defaults'
-import { DATABASE_REFERENCES, FIRESTORE_REFERENCES } from '../../../../firebase/references'
+import ROUTES from '@routes'
+import { DEFAULT_DATABASE_USER, DEFAULT_FIRESTORE_USER } from '@constants/defaults'
+import { DATABASE_REFERENCES, FIRESTORE_REFERENCES } from '@firebase-references'
 
 
 // Redux:
-import { AppDispatch, RootState } from '../../../../redux/store'
-import { UserState } from '../../../../redux/store/user'
-import { segregateContacts } from '../../../../redux/actions/onboarding'
-import { setDatabaseUser, setFirestoreUser } from '../../../../redux/actions/user'
+import { AppDispatch, RootState } from '@store/index'
+import { UserState } from '@store/user'
+import { segregateContacts } from '@actions/onboarding'
+import { setDatabaseUser, setFirestoreUser } from '@actions/user'
 
 
 // Functions:

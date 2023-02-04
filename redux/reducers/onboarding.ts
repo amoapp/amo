@@ -3,8 +3,8 @@ import { ActionResult, ActionType } from '../types'
 
 
 // Constants:
-import { DEFAULT_ONBOARDING_STATE, OnboardingState } from '../store/onboarding'
-import { SEGREGATE_CONTACTS } from '../actions/onboarding'
+import { DEFAULT_ONBOARDING_STATE, OnboardingState } from '@store/onboarding'
+import { SEGREGATE_CONTACTS } from '@actions/onboarding'
 
 
 // Functions:

@@ -11,7 +11,7 @@ export type ONBOARDING_PAYLOAD_TYPE = Contact[]
 
 
 // Constants:
-import { DATABASE_REFERENCES } from '../../firebase/references'
+import { DATABASE_REFERENCES } from '@firebase-references'
 export const SEGREGATE_CONTACTS = 'SEGREGATE_CONTACTS'
 
 

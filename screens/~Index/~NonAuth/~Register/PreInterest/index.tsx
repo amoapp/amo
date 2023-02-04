@@ -12,7 +12,7 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 
 
 // Constants:
-import ROUTES from '../../../../../routes'
+import ROUTES from '@routes'
 
 
 // Functions:

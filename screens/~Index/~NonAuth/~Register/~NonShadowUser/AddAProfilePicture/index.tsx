@@ -4,23 +4,18 @@ import styled from 'styled-components/native'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigation } from '@react-navigation/native'
 import * as ImagePicker from 'expo-image-picker'
-import storage from '@react-native-firebase/storage'
+import { setProfilePicture } from '@api'
 
 
 // Typescript:
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { StackNavigatorParamList } from '../../../../../../types'
-import { AppDispatch, RootState } from '../../../../../../redux/store'
-import { UserState } from '../../../../../../redux/store/user'
+import { AppDispatch, RootState } from '@store/index'
+import { UserState } from '@store/user'
 
 
 // Constants:
-import ROUTES from '../../../../../../routes'
-import { STORAGE_REFERENCES } from '../../../../../../firebase/references'
-
-
-// Redux:
-import { setDatabaseUser } from '../../../../../../redux/actions/user'
+import ROUTES from '@routes'
 
 
 // Styles:
@@ -36,7 +31,7 @@ const AddAProfilePicture = () => {
   // State:
   const user = useSelector<RootState, UserState>(state => state.user)
   const [ status, requestPermission ] = ImagePicker.useMediaLibraryPermissions()
-  const [ profilePicture, setProfilePicture ] = useState<string | null>(null)
+  const [ profilePicture, _setProfilePicture ] = useState<string | null>(null)
   const [ errorPrompt, setErrorPrompt ] = useState('')
 
   const pickImage = async () => {
@@ -45,7 +40,7 @@ const AddAProfilePicture = () => {
         mediaTypes: ImagePicker.MediaTypeOptions.Images,
         quality: 1
       })
-      if (!result.canceled) setProfilePicture(result.assets[0].uri)
+      if (!result.canceled) _setProfilePicture(result.assets[0].uri)
     } else {
       await requestPermission()
     }
@@ -58,8 +53,15 @@ const AddAProfilePicture = () => {
           setErrorPrompt('Please select an image')
           return
         }
-        storage().ref(`${ STORAGE_REFERENCES.USERS }/${ user.firestore.phoneNumber }`)
-        dispatch(setDatabaseUser({ profilePicture }))
+        const { status, payload } = await setProfilePicture({
+          phoneNumber: user.firestore.phoneNumber,
+          profilePicture
+        })
+        if (!status) {
+          setErrorPrompt(`Error: ${ payload }`)
+        } else {
+          // TODO: Handle successful navigation here.
+        }
       }
       navigation.navigate(ROUTES.ADD_A_PROFILE_PICTURE.name)
     } catch(e) {

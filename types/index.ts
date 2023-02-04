@@ -1,13 +1,12 @@
+// NOTE: The aim with this file is to break it up into more specialized units as
+// the application grows in size.
+
 // Typescript:
 import { Contact as ExpoContact } from 'expo-contacts'
 
 
 // Constants:
-import ROUTES from '../routes'
-import {
-  DEFAULT_DATABASE_USER,
-  DEFAULT_FIRESTORE_USER
-} from '../constants/defaults'
+import ROUTES from '@routes'
 
 
 // Exports:

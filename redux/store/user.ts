@@ -2,7 +2,7 @@
 import {
   DEFAULT_DATABASE_USER,
   DEFAULT_FIRESTORE_USER
-} from '../../constants/defaults'
+} from '@constants/defaults'
 
 
 // Exports:

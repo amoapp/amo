@@ -8,16 +8,16 @@ import { useNavigation } from '@react-navigation/native'
 // Typescript:
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { StackNavigatorParamList } from '../../../../../../types'
-import { AppDispatch } from '../../../../../../redux/store'
+import { AppDispatch } from '@store/index'
 
 
 // Constants:
-import ROUTES from '../../../../../../routes'
-import { GENDER } from '../../../../../../constants/defaults'
+import ROUTES from '@routes'
+import { GENDER } from '@constants/defaults'
 
 
 // Redux:
-import { setDatabaseUser, setFirestoreUser } from '../../../../../../redux/actions/user'
+import { setDatabaseUser, setFirestoreUser } from '@actions/user'
 
 
 // Styles:

@@ -1,6 +1,6 @@
 // Typescript:
-import { ONBOARDING_ACTION_TYPE, ONBOARDING_PAYLOAD_TYPE } from './actions/onboarding'
-import { USER_ACTION_TYPE, USER_PAYLOAD_TYPE } from './actions/user'
+import { ONBOARDING_ACTION_TYPE, ONBOARDING_PAYLOAD_TYPE } from '@actions/onboarding'
+import { USER_ACTION_TYPE, USER_PAYLOAD_TYPE } from '@actions/user'
 
 
 // Exports:

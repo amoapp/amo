@@ -1,6 +1,15 @@
 {
   "extends": "expo/tsconfig.base",
   "compilerOptions": {
-    "strict": true
+    "strict": true,
+    "baseUrl": "./",
+    "paths": {
+      "@actions/*": ["./redux/actions/*"],
+      "@api": ["./firebase/api.ts"],
+      "@constants/*": ["./constants/*"],
+      "@firebase-references": ["./firebase/references.ts"],
+      "@routes": ["./routes.ts"],
+      "@store/*": ["./redux/store/*"],
+    }
   }
 }

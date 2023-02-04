@@ -14,12 +14,12 @@ import { StackNavigatorParamList } from '../../../../types'
 
 
 // Constants:
-import ROUTES from '../../../../routes'
+import ROUTES from '@routes'
 import COUNTRY_CALLING_CODES from 'country-calling-code'
 
 
 // Redux:
-import { setFirestoreUser } from '../../../../redux/actions/user'
+import { setFirestoreUser } from '@actions/user'
 
 
 // Functions:
