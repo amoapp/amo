@@ -118,7 +118,7 @@ const OTPVerification = () => {
       if (!otp || !confirmer) return false
       setErrorPrompt('')
       setIsButtonLoading(true)
-      await confirmer.confirm(otp)
+      await confirmer.confirm(otp) // TODO: Check if confirmation passes. Test and see.
       dispatch(setDatabaseUser({ verified: true }))
       dispatch(setFirestoreUser({ phoneNumber: route.params.phoneNumber }))
       stopListener()
