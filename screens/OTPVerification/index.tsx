@@ -13,7 +13,7 @@ import { useDispatch, useSelector } from 'react-redux'
 
 
 // Typescript:
-import { Contact, StackNavigatorParamList } from '../../../../types'
+import { Contact, StackNavigatorParamList } from '../../types'
 
 
 // Constants:

@@ -9,6 +9,7 @@
       "@constants/*": ["./constants/*"],
       "@firebase-references": ["./firebase/references.ts"],
       "@routes": ["./routes.ts"],
+      "@screens/*": ["./screens/*"],
       "@store/*": ["./redux/store/*"],
     }
   }

@@ -9,7 +9,7 @@ import { setProfilePicture } from '@api'
 
 // Typescript:
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
-import { StackNavigatorParamList } from '../../../../../../types'
+import { StackNavigatorParamList } from '../../../types'
 import { AppDispatch, RootState } from '@store/index'
 import { UserState } from '@store/user'
 

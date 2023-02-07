@@ -7,7 +7,7 @@ import { useNavigation } from '@react-navigation/native'
 
 // Typescript:
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
-import { StackNavigatorParamList } from '../../../../../../types'
+import { StackNavigatorParamList } from '../../../types'
 import { AppDispatch } from '@store/index'
 
 

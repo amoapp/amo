@@ -8,7 +8,7 @@ import database from '@react-native-firebase/database'
 
 // Typescript:
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
-import { StackNavigatorParamList } from '../../../../../../types'
+import { StackNavigatorParamList } from '../../../types'
 import { AppDispatch } from '@store/index'
 
 

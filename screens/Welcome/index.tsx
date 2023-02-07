@@ -10,7 +10,7 @@ import { useDispatch } from 'react-redux'
 
 
 // Typescript:
-import { StackNavigatorParamList } from '../../../../types'
+import { StackNavigatorParamList } from '../../types'
 
 
 // Constants:

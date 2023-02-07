@@ -7,7 +7,7 @@ import Share from 'react-native-share'
 
 
 // Typescript:
-import { StackNavigatorParamList } from '../../../../../types'
+import { StackNavigatorParamList } from '../../../types'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 
 
