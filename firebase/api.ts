@@ -50,6 +50,20 @@ export const setProfilePicture = async ({
   }
 }
 
+export const checkUsernameExistence = async (username: string): Promise<APIResponse<boolean>> => {
+  try {
+    const usernameExists = (await database()
+      .ref(DATABASE_REFERENCES.USERS)
+      .orderByChild('username')
+      .equalTo(username)
+      .once('value'))
+      .exists()
+    return { status: true, payload: usernameExists }
+  } catch(e) {
+    return { status: false, payload: e }
+  }
+}
+
 /**
  * Generates username suggestions and checks their validity before
  * returning them.
@@ -71,13 +85,8 @@ export const generateUsernameSuggestions = async (name: string): Promise<APIResp
     const suggestions: string[] = []
     for await (const suggestionCandidate of suggestionCandidates) {
       if (suggestions.length > 3) break
-      const usernameExists = (await database()
-        .ref(DATABASE_REFERENCES.USERS)
-        .orderByChild('username')
-        .equalTo(suggestionCandidate)
-        .once('value'))
-        .exists()
-      if (!usernameExists) suggestions.push(suggestionCandidate)
+      const result = await checkUsernameExistence(suggestionCandidate)
+      if (result.status) if (!result.payload) suggestions.push(suggestionCandidate)
     }
     return { status: true, payload: suggestions }
   } catch(e) {

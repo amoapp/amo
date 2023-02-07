@@ -7,13 +7,12 @@ import auth, { FirebaseAuthTypes } from '@react-native-firebase/auth'
 import database from '@react-native-firebase/database'
 import firestore from '@react-native-firebase/firestore'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
-import * as Contacts from 'expo-contacts'
-import phone from 'phone'
 import { useDispatch, useSelector } from 'react-redux'
+import useContacts from '@hooks/useContacts'
 
 
 // Typescript:
-import { Contact, StackNavigatorParamList } from '../../types'
+import { StackNavigatorParamList } from '../../types'
 
 
 // Constants:
@@ -37,34 +36,14 @@ const OTPVerification = () => {
   const dispatch = useDispatch<any>() // TODO: This might be a source of bugs in the future. Make sure this is properly typed and does not affect the rest of the application
   
   // State:
+  const { getContacts, errorPrompt: useContactsErrorPrompt } = useContacts()
+  const { otp, stopListener, startListener } = useOtpVerify({ numberOfDigits: 4 })
   const user = useSelector<RootState, UserState>(state => state.user)
   const [ isButtonLoading, setIsButtonLoading ] = useState(false)
   const [ confirmer, setConfirmer ] = useState<FirebaseAuthTypes.ConfirmationResult>()
   const [ errorPrompt, setErrorPrompt ] = useState('')
 
   // Functions:
-  const getContacts = async () => {
-    try {
-      const fetchedContacts = (await Contacts.getContactsAsync({
-        fields: [ Contacts.Fields.Name, Contacts.Fields.PhoneNumbers, Contacts.Fields.Emails ],
-      }))
-        .data
-        .filter(contact => {
-          if (contact.phoneNumbers) if (contact.phoneNumbers[0].number) return phone(contact.phoneNumbers[0].number).isValid
-          else return false
-        })
-        .filter(contact => {
-          const contactPhoneNumber = phone(contact.phoneNumbers?.[0].number as string).phoneNumber
-          if (contactPhoneNumber !== null) return true
-          return false
-        }) as Contact[]
-      return fetchedContacts
-    } catch(e) {
-      console.error('Error: ', e)
-      return []
-    }
-  }
-
   const shadowUserFlow = async (databaseUser: typeof DEFAULT_DATABASE_USER) => {
     try {
       const impressions = databaseUser.impressions
@@ -82,7 +61,7 @@ const OTPVerification = () => {
       }))
       navigation.navigate(ROUTES.PRE_INTEREST.name, { impressions, interactions })
     } catch(e) {
-      console.error('Error: ', e)
+      setErrorPrompt(`Error: ${ (e as Error).message }`)
     }
   }
 
@@ -96,7 +75,7 @@ const OTPVerification = () => {
       dispatch(setFirestoreUser(firestoreUser))
       navigation.navigate(ROUTES.HOME.name)
     } catch(e) {
-      console.error('Error: ', e)
+      setErrorPrompt(`Error: ${ (e as Error).message }`)
     } 
   }
 
@@ -109,8 +88,19 @@ const OTPVerification = () => {
       dispatch(segregateContacts(contacts))
       navigation.navigate(ROUTES.WHAT_IS_YOUR_NAME.name)
     } catch(e) {
-      console.error('Error: ', e)
+      setErrorPrompt(`Error: ${ (e as Error).message }`)
     }
+  }
+
+  const handleUserFlow = async () => {
+    const databaseUserSnapshot = await database().ref(`${ DATABASE_REFERENCES.USERS }/${ route.params.phoneNumber }`).once('value')
+    const doesUserAlreadyExist = databaseUserSnapshot.exists()
+    if (doesUserAlreadyExist) {
+      const databaseUser = databaseUserSnapshot.val() as typeof DEFAULT_DATABASE_USER
+      const isShadowAccount = !databaseUser.verified
+      if (isShadowAccount) await shadowUserFlow(databaseUser)
+      else await loginFlow(databaseUser)
+    } else await registerFlow()
   }
 
   const verifyOTP = async () => {
@@ -122,14 +112,7 @@ const OTPVerification = () => {
       dispatch(setDatabaseUser({ verified: true }))
       dispatch(setFirestoreUser({ phoneNumber: route.params.phoneNumber }))
       stopListener()
-      const databaseUserSnapshot = await database().ref(`${ DATABASE_REFERENCES.USERS }/${ route.params.phoneNumber }`).once('value')
-      const doesUserAlreadyExist = databaseUserSnapshot.exists()
-      if (doesUserAlreadyExist) {
-        const databaseUser = databaseUserSnapshot.val() as typeof DEFAULT_DATABASE_USER
-        const isShadowAccount = !databaseUser.verified
-        if (isShadowAccount) await shadowUserFlow(databaseUser)
-        else await loginFlow(databaseUser)
-      } else await registerFlow()
+      handleUserFlow()
     } catch(e) {
       setErrorPrompt('Invalid OTP!')
     } finally {
@@ -138,13 +121,11 @@ const OTPVerification = () => {
   }
 
   // Effects:
-  const { otp, stopListener, startListener } = useOtpVerify({ numberOfDigits: 4 })
-
   useEffect(() => {
     auth()
       .signInWithPhoneNumber(route.params.phoneNumber)
-      .then(confirm => {
-        setConfirmer(confirm)
+      .then(confirmerFunction => {
+        setConfirmer(confirmerFunction)
         startListener()
       })
   }, [])
@@ -152,6 +133,10 @@ const OTPVerification = () => {
   useEffect(() => {
     if (otp && confirmer) verifyOTP()
   }, [ otp, confirmer ])
+
+  useEffect(() => {
+    if (useContactsErrorPrompt.length > 0) setErrorPrompt(useContactsErrorPrompt)
+  }, [ useContactsErrorPrompt ])
 
   // Return:
   return (

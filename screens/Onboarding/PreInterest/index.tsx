@@ -16,6 +16,7 @@ import ROUTES from '@routes'
 
 
 // Functions:
+// TODO: Reduce this file.
 const PreInterest = () => {
   // Constants:
   const route = useRoute<RouteProp<StackNavigatorParamList, typeof ROUTES.PRE_INTEREST.name>>()

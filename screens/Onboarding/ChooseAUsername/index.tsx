@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import styled from 'styled-components/native'
 import { useDispatch } from 'react-redux'
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native'
-import database from '@react-native-firebase/database'
+import { checkUsernameExistence } from '@api'
 
 
 // Typescript:
@@ -14,7 +14,6 @@ import { AppDispatch } from '@store/index'
 
 // Constants:
 import ROUTES from '@routes'
-import { DATABASE_REFERENCES } from '@firebase-references'
 
 
 // Redux:
@@ -56,14 +55,13 @@ const ChooseAUsername = () => {
         return
       }
       setIsButtonLoading(true)
-      const usernameExists = (await database()
-        .ref(DATABASE_REFERENCES.USERS)
-        .orderByChild('username')
-        .equalTo(_username)
-        .once('value'))
-        .exists()
-      if (usernameExists) {
+      const { payload, status } = await checkUsernameExistence(_username)
+      if (status && payload) {
         setErrorPrompt('Username already exists')
+        setIsButtonLoading(false)
+        return
+      } else if (!status) {
+        setErrorPrompt(`Failed to check username: ${ (payload as Error).message }`)
         setIsButtonLoading(false)
         return
       }

@@ -56,10 +56,10 @@ export const ONBOARDING_ROUTES = {
 } as const
 
 export const AUTHENTICATED_ROUTES = {
-  // HOME: {
-  //   name: 'home',
-  //   component: Home
-  // }
+  HOME: {
+    name: 'home',
+    component: Welcome
+  }
 } as const
 
 const ROUTES = {

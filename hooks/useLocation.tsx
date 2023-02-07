@@ -41,8 +41,10 @@ const useLocation = () => {
     try {
       if (locationPermission?.granted || locationPermission?.status === Location.PermissionStatus.GRANTED) {
         const location = await Location.getCurrentPositionAsync({})
-        setGeo({ latitude: location.coords.latitude, longitude: location.coords.longitude })
+        const newGeo = { latitude: location.coords.latitude, longitude: location.coords.longitude }
+        setGeo(newGeo)
         setIsGeoSet(true)
+        return newGeo
       } else {
         if (locationPermission?.canAskAgain) await requestLocationPermission()
         else setErrorPrompt(USE_LOCATION_ERRORS.PERMISSION_DENIED)
@@ -59,8 +61,9 @@ const useLocation = () => {
         locationPermission?.status === Location.PermissionStatus.GRANTED
       ) {
         if (!isGeoSet) await getGeo()
-        const geocode = (await Location.reverseGeocodeAsync(geo))[0]
-        setGeocodedAddress(geocode)
+        const newGeocodedAddress = (await Location.reverseGeocodeAsync(geo))[0]
+        setGeocodedAddress(newGeocodedAddress)
+        return newGeocodedAddress
       } else {
         if (locationPermission?.canAskAgain) await requestLocationPermission()
         else setErrorPrompt(USE_LOCATION_ERRORS.PERMISSION_DENIED)
@@ -77,7 +80,11 @@ const useLocation = () => {
         locationPermission?.status === Location.PermissionStatus.GRANTED
       ) {
         if (!geocodedAddress) await getGeocodedAddress()
-        if (geocodedAddress) setCountryCodes(COUNTRY_CALLING_CODES.find(code => code.country === geocodedAddress.country)?.countryCodes ?? [])
+        if (geocodedAddress) {
+          const newCountryCodes = COUNTRY_CALLING_CODES.find(code => code.country === geocodedAddress.country)?.countryCodes ?? []
+          setCountryCodes(newCountryCodes)
+          return newCountryCodes
+        }
       } else {
         if (locationPermission?.canAskAgain) await requestLocationPermission()
         else setErrorPrompt(USE_LOCATION_ERRORS.PERMISSION_DENIED)
