@@ -8,6 +8,7 @@
       "@api": ["./firebase/api.ts"],
       "@constants/*": ["./constants/*"],
       "@firebase-references": ["./firebase/references.ts"],
+      "@hooks/*": ["./hooks/*"],
       "@routes": ["./routes.ts"],
       "@screens/*": ["./screens/*"],
       "@store/*": ["./redux/store/*"],
