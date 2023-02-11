@@ -1,0 +1,110 @@
+{
+  "todohighlight.keywords": [
+    {
+      "text": "NOTE:",
+      "color": "#F4EDED",
+      "backgroundColor": "#36827F"
+    },
+    {
+      "text": "TEMP:",
+      "color": "#172A3A",
+      "backgroundColor": "#53D8FB"
+    },
+    {
+      "text": "Packages:",
+      "color": "#172A3A",
+      "backgroundColor": "#75DDDD",
+      "isWholeLine": true
+    },
+    {
+      "text": "Typescript:",
+      "color": "#020402",
+      "backgroundColor": "#3A86FF",
+      "isWholeLine": true
+    },
+    {
+      "text": "Imports:",
+      "color": "#09BC8A",
+      "backgroundColor": "#004346",
+      "isWholeLine": true
+    },
+    {
+      "text": "Constants:",
+      "color": "#0094C6",
+      "backgroundColor": "#000022",
+      "isWholeLine": true
+    },
+    {
+      "text": "Components:",
+      "color": "#020402",
+      "backgroundColor": "#FFBE0B",
+      "isWholeLine": true
+    },
+    {
+      "text": "Redux:",
+      "color": "#E8F1F2",
+      "backgroundColor": "#734FAC",
+      "isWholeLine": true
+    },
+    {
+      "text": "Styles:",
+      "color": "#E8F1F2",
+      "backgroundColor": "#FF006E",
+      "isWholeLine": true
+    },
+    {
+      "text": "Variables:",
+      "color": "#CCAD8F",
+      "backgroundColor": "#B3001B",
+      "isWholeLine": true
+    },
+    {
+      "text": "Functions:",
+      "color": "#DBE9EE",
+      "backgroundColor": "#166088",
+      "isWholeLine": true
+    },
+    {
+      "text": "State:",
+      "color": "#020402",
+      "backgroundColor": "#3DD6D0",
+      "isWholeLine": true
+    },
+    {
+      "text": "Memo:",
+      "color": "#E8F1F2",
+      "backgroundColor": "#0B5351",
+      "isWholeLine": true
+    },
+    {
+      "text": "Ref:",
+      "color": "#020402",
+      "backgroundColor": "#7CFFC4",
+      "isWholeLine": true
+    },
+    {
+      "text": "Effects:",
+      "color": "#E8F1F2",
+      "backgroundColor": "#15B097",
+      "isWholeLine": true
+    },
+    {
+      "text": "Return:",
+      "color": "#040F16",
+      "backgroundColor": "#71F79F",
+      "isWholeLine": true
+    },
+    {
+      "text": "PropTypes:",
+      "color": "#23967F",
+      "backgroundColor": "#ADBCA5",
+      "isWholeLine": true
+    },
+    {
+      "text": "Exports:",
+      "color": "#DBDBDB",
+      "backgroundColor": "#FF299C",
+      "isWholeLine": true
+    }
+  ]
+}
