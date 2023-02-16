@@ -4,7 +4,7 @@ import { Linking, Platform } from 'react-native'
 import { captureRef } from 'react-native-view-shot'
 import Share from 'react-native-share'
 
-//Functions:
+// Functions:
 
 const useSocialMediaShare = () => {
   //Constants:
@@ -20,7 +20,7 @@ const useSocialMediaShare = () => {
         package: 'com.instagram.android',
         canOpen: false
       }
-    }) // NOTE: We will probably prune this depending on testing to only limit to Instagram Story, WhatsApp and Snapchat - or just IG Story
+    })
     const [ isCapturingScreenshot, setIsCapturingScreenshot ] = useState(false)
     const [ shareableImage, setShareableImage ] = useState('')
 
